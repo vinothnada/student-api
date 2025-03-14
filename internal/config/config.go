@@ -9,7 +9,7 @@ import (
 )
 
 type HTTPServer struct {
-	Addr string
+	Addr string `yaml:"address" env-required:"true"`
 }
 
 type Config struct {
@@ -34,8 +34,8 @@ func MustLoad() *Config {
 		if _, err := os.Stat(configPath); os.IsNotExist((err)) {
 			log.Fatalf("config file does not exists: %s", configPath)
 		}
-	}
 
+	}
 	var cfg Config
 
 	err := cleanenv.ReadConfig(configPath, &cfg)
